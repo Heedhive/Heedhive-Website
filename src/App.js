@@ -1,23 +1,40 @@
 import './App.css';
-import { About } from './component/about';
-import ContactForm from './component/contact';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AboutSection } from './component/about';
+import { ClientsSection } from './component/client';
+import { ContactSection } from './component/contact';
 import { Footer } from './component/footer';
-import { Hero } from './component/hero';
-import { Mobile } from './component/Mobile';
+import { HeroSection } from './component/hero';
 import { NavBar } from './component/navbar';
-import { Service } from './component/service';
+import { ServicesSection } from './component/service';
+import { ServicePage } from './component/service/ServicePage';
+import ScrollToTop from './component/ScrollToTop';
+
+function Home() {
+  return (
+    <div>
+      <NavBar />
+      <HeroSection />
+      <AboutSection />
+      <ServicesSection />
+      <ClientsSection />
+      <ContactSection />
+      <Footer />
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Hero />
-      <Mobile />
-      <About />
-      <Service />
-      <ContactForm />
-      <Footer />
-    </div>
+    <Router>
+      <ScrollToTop />
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/service/:serviceId" element={<ServicePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
